@@ -16,6 +16,13 @@ Friday: 7-7:15pm Sprint Review (15 mins) <br>
 Saturday: <br>
 Sunday: <br>
 
+To run code on your machine:
+1. Inside Visual studio, run the command: ``git clone https://github.com/COS420-F25/TeamC.git``
+2. ``cd`` into ``TeamC``
+3. Run the command ``npm install``
+4. To open the webpage type: ``npm run start``
+   
+
 Problem statements go below here----------------------------------<br>
 AI is too easily abused by students to give them answers. This reduces the effectiveness of homework for students. For example, many questions, even advanced questions can now be copy and pasted into an AI prompt and reward the students with a fairly accurate answer. Before, the hassle and effort required to search the internet for the answer typically prevented such easy answers leading to effort being required even when online searches were used. The other solution of banning the use of AI offers other unique problems such as students being falsely accused of AI use, and students simply using it when they can not get caught, all that while refusing the helpful qualities that AI could have on learning. How can we design a system where AI’s strong search abilities can be used to help students learn rather than being used as a way to avoid learning or being scorned.<br>
 
