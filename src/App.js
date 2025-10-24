@@ -1,7 +1,11 @@
 import logo from './logo.svg';
 import './App.css';
+import {auth} from "./firebase-config"
+import {useSignInWithGoogle} from "react-firebase-hooks/auth";
+
 
 function App() {
+  const [signInWithGoogle, user, loading,error] = useSignInWithGoogle(auth);
   return (
     <div className="App">
       <header className="App-header">
@@ -9,7 +13,10 @@ function App() {
           <h1>
             {" "}
             <span style={{color: "blue"}}>
-              Well boys, this is it
+              Nudge App
+              <div> 
+                <button onClick={()=>signInWithGoogle()} >Sign In</button>
+              </div>
               </span>
             </h1>
         <img src={logo} className="App-logo" alt="logo" />
