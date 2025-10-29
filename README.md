@@ -24,7 +24,7 @@ To run code on your machine:
 4. To open the webpage type: ``npm run start``
    
 
-## Problem statements go below here<br>
+## Problem statements<br>
 <br>
 
 Students in the computer science fields often struggle post transition to the professional world due to anxiety and struggling to feel comfortable. The junior developer may struggle to ask for help when an error is encountered due to their discomfort.  Internships attempt to lessen the gap through real world experience, however interns are often made to complete smaller tasks deemed less important, which fails to make them more confident. This lack of confidence can stem from a fear of seeming less capable, which can make a person hesitate to seek help based on a self perceived criteria of what was supposed to be learned at this point. How might we facilitate junior developers to feel confident enough to ask questions within professional environments?
