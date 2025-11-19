@@ -8,3 +8,7 @@ interface userSettings{
     fontSize: number
     fonts: String
 }
+//Make the mode toggle
+function ModeToggle(){
+    const [mode, setMode] = useState(false);
+}
