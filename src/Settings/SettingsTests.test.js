@@ -6,14 +6,13 @@ import {Settings} from './Settings';
 //Make a new branch for the features
 //
 
-describe('Settings Component', () => {
 
-    beforeEach(() => render(<Settings/>));
-    }
+
     //first test that there is a settings button
     test('Render Settings Button', () => {
-        const btn = screen.getByRole('button', {name: /settings/i});
-        expect(btn).toBeInTheDocument();
+        render(<Settings/>);
+        const settingsButton = screen.getByText(/settings/i);
+        expect(settingsButton).toBeInTheDocument();
     });
     
     //text if the settings button can be pressed
@@ -28,13 +27,14 @@ describe('Settings Component', () => {
         expect(window).toBeVisible();
     });
 
-    //check to see if light/darkmode toggle appears
-    // test('Check for Mode toggle', () => {
-
-    // });
+    //test that modetoggle is on the page
+    test('modetoggle is here', () => {
+        render(<Settings/>);
+        const checkboxCheck = screen.getByText(/Toggle Mode/i);
+        expect(checkboxCheck).toBeInTheDocument();
+    })
 
   
 
 
     //check to see that the font size works
-});

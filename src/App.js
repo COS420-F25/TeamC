@@ -10,8 +10,18 @@ function App() {
   const [signInWithGoogle, user, loading,error] = useSignInWithGoogle(auth);
   const SignOutFunction = () =>{signOut(auth);};
   const [showQuestions, setShowQuestions] = useState(false);
+  const [showSettings, setShowSettings] = useState(false);
 
   if (user) {
+
+    //adding Settings function here
+    if(showSettings){
+      return (
+        <div className= 'App'>
+          <button onClick={() => setShowSettings(false)}>Back</button>
+        </div>
+      )
+    }
 
     if (showQuestions){
       return(
