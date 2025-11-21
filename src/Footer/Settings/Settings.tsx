@@ -11,7 +11,7 @@ export interface Settings{
 }
 //make the settings popout button
 
-export function toggleSettings(){
+const ToggleSettings = () => {
         const [displaySettings, setDisplaySettings] = useState(false);
         
         return(
@@ -40,5 +40,4 @@ export function toggleSettings(){
 );
 }
 
-//Make the mode toggle
-ModeToggle()
+

@@ -1,9 +1,11 @@
 import logo from './logo.svg';
 import './App.css';
 import {auth} from "./firebase-config"
-import {useSignInWithGoogle} from "react-firebase-hooks/auth";
+import { useSignInWithGoogle } from "react-firebase-hooks/auth";
 import { signOut } from "firebase/auth";
 import React, { useState } from "react";
+import SettingsDialog from "./Footer/Settings/SettingsDialog"
+import {Footer} from './/Footer.css'
 
 
 function App() {
@@ -11,17 +13,14 @@ function App() {
   const SignOutFunction = () =>{signOut(auth);};
   const [showQuestions, setShowQuestions] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
+  const [settings, setSettings] = useState({
+    theme: 'light',
+    pushNotif: false,
+    fontSize: 16,
+    fonts: 'Comic Sans'
+  });
 
   if (user) {
-
-    //adding Settings function here
-    if(showSettings){
-      return (
-        <div className= 'App'>
-          <button onClick={() => setShowSettings(false)}>Back</button>
-        </div>
-      )
-    }
 
     if (showQuestions){
       return(
@@ -45,6 +44,15 @@ function App() {
           <button> Send </button>
           </footer>
 
+          <footer>
+            <SettingsDialog
+          isOpen={showSettings}
+          defaultValue={settings}
+          onClose={() => setShowSettings(false)}
+          onConfirm={(newSettings) => {setShowSettings(false); setSettings(newSettings)}}
+        />
+          </footer>
+
       </div>
     )}
     return (
@@ -61,11 +69,16 @@ function App() {
           <button onClick={()=>setShowQuestions(true)}>View Questions</button>
           </div>
 
+          <div style = {{flex: "2",textAlign: "center"}}>
+          <button onClick={()=>setShowSettings(true)}>Settings</button>
+          </div>
+
           <div style = {{flex: "1",}}>
           </div>
 
         </header>
-
+        
+        
       </div>
     )
   }
@@ -95,6 +108,14 @@ function App() {
         </a>
     </div>
   );
-}
+  
+  return(
+      <div className = "App" >
+        <Footer>
 
+        </Footer>
+    
+    </div>
+    );
+  }
 export default App;

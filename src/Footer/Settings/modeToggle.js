@@ -1,4 +1,5 @@
 import { useState } from "react";
+import React from 'react';
 
 export function ModeToggle(){
     const [mode, setMode] = useState<Boolean>(false);
