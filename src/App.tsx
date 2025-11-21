@@ -4,14 +4,13 @@ import {auth} from "./firebase-config"
 import {useSignInWithGoogle} from "react-firebase-hooks/auth";
 import { signOut } from "firebase/auth";
 import React, { useState } from "react";
-import { QuestionsPage } from './features/QuestionsPage';
+import {QuestionsPage} from './features/QuestionsPage.tsx';
 import { Groups } from './features/Groups';
 
-function App() {
+function App(): JSX.Element {
   const [signInWithGoogle, user, loading,error] = useSignInWithGoogle(auth);
   const SignOutFunction = () =>{signOut(auth);};
-  const [showQuestions, setShowQuestions] = useState(false);
-
+  const [showQuestions, setShowQuestions] = useState<boolean>(false);
   if (user) {
 
     if (showQuestions){
@@ -19,7 +18,7 @@ function App() {
         
       <div className='App'>
         
-        <QuestionsPage></QuestionsPage>
+        <QuestionsPage showQuestions ={showQuestions} setShowQuestions={setShowQuestions}></QuestionsPage>
         <hr></hr>
       </div>
     )}
@@ -44,7 +43,7 @@ function App() {
             </h1>
         <img src={NudgeLogo1} className="App-logo" alt="nudge-logo" />
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          Edit <code>src/App.tsx/code> and save to reload.
         </p>
         <a
           className="App-link"

@@ -1,8 +1,7 @@
 import React,{ useState } from "react";
 
 
-export function QuestionsPage(){
-    const [showQuestions, setShowQuestions] = useState(false);
+export function QuestionsPage({showQuestions,setShowQuestions}:{showQuestions:boolean, setShowQuestions:React.Dispatch<React.SetStateAction<boolean>>}): JSX.Element {
     return(
         
         <div className='App'>
