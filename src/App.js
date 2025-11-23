@@ -15,7 +15,7 @@ function App() {
   const SignOutFunction = () =>{signOut(auth);};
   const [showQuestions, setShowQuestions] = useState(false);
   const [showFlags, setShowFlags] = useState(false);
-  const [priv] = useCollection(collection(db, 'admin'));
+  const [showGroups, setShowGroups] = useState(true);
 
 
   if (user) {
@@ -28,23 +28,24 @@ function App() {
         <QuestionsPage></QuestionsPage>
         <hr></hr>
       </div>
-    )}
+      );
+    }
     if (showFlags){
       return(
-
         <div className='App'>
-
           <Flags></Flags>
           <hr></hr>
         </div>
-    )}
-    return (
+      );
+    }
+    if (showGroups){
+      return(
       <div className='App'>
         <Groups setShowQuestions={setShowQuestions} setShowFlags={setShowFlags}></Groups>
       </div>
     )
-    
-    }
+  }
+}
   
 
   return (

@@ -1,6 +1,7 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import App from './App';
 import { useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import { Groups, } from './features/Groups';
 
 jest.mock('react-firebase-hooks/auth',() => ({
   useSignInWithGoogle: jest.fn(),
@@ -31,6 +32,26 @@ jest.mock('react-firebase-hooks/auth',() => ({
     const SignInButton = screen.getByText(/View Questions/i);
     expect(SignInButton).toBeInTheDocument();
   });
+
+
+  test('View Flags', () => {
+    useSignInWithGoogle.mockReturnValue([jest.fn(), {displayName: 'User'}]);
+    render(<App />);
+    const SignInButton = screen.getByText(/View Flags/i);
+    expect(SignInButton).toBeInTheDocument();
+  });
+
+
+  test('View Flags Page', () => {
+      useSignInWithGoogle.mockReturnValue([jest.fn(), {displayName: 'User'}]);
+      render(<App />);
+      const ViewFlagsButton = screen.getByText(/View Flags/i);
+      fireEvent.click(ViewFlagsButton);
+      const FlagsTitle = screen.getByText(/Flags/i);
+      expect(FlagsTitle).toBeInTheDocument();
+    });
+
+  
 
 
 
