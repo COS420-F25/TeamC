@@ -1,16 +1,22 @@
 import NudgeLogo1 from './features/NudgeLogo1.png';
 import './App.css';
-import {auth} from "./firebase-config"
+import {auth, db} from "./firebase-config"
 import {useSignInWithGoogle} from "react-firebase-hooks/auth";
+import { useCollection } from 'react-firebase-hooks/firestore';
 import { signOut } from "firebase/auth";
 import React, { useState } from "react";
+import {collection} from "firebase/firestore";
 import { QuestionsPage } from './features/QuestionsPage';
 import { Groups } from './features/Groups';
+import { Flags } from './features/Flags';
 
 function App() {
   const [signInWithGoogle, user, loading,error] = useSignInWithGoogle(auth);
   const SignOutFunction = () =>{signOut(auth);};
   const [showQuestions, setShowQuestions] = useState(false);
+  const [showFlags, setShowFlags] = useState(false);
+  const [priv] = useCollection(collection(db, 'admin'));
+
 
   if (user) {
 
@@ -23,16 +29,27 @@ function App() {
         <hr></hr>
       </div>
     )}
+    if (showFlags){
+      return(
+
+        <div className='App'>
+
+          <Flags></Flags>
+          <hr></hr>
+        </div>
+    )}
     return (
       <div className='App'>
-        <Groups setShowQuestions={setShowQuestions}></Groups>
-
+        <Groups setShowQuestions={setShowQuestions} setShowFlags={setShowFlags}></Groups>
       </div>
     )
-  }
+    
+    }
+  
 
   return (
     <div className="App">
+
           <h1>
             {" "}
             <span style={{color: "blue"}}>
@@ -55,7 +72,7 @@ function App() {
           Learn React
         </a>
     </div>
-  );
+  )
 }
 
 export default App;
