@@ -8,7 +8,6 @@ import {db} from "../firebase-config"
 
 export function Groups({setShowQuestions, setShowFlags}){
   const SignOutFunction = () =>{signOut(auth);};
-  const [priv] = useCollection(collection(db, 'admin'));
   const tempAd = true;
     return(
         <div className='App'>
