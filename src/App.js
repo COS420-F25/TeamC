@@ -19,8 +19,8 @@ function App() {
         
       <div className='App'>
         
-        <QuestionsPage></QuestionsPage>
-        <hr></hr>
+        <QuestionsPage setShowQuestions={setShowQuestions}></QuestionsPage>
+        
       </div>
     )}
     return (
