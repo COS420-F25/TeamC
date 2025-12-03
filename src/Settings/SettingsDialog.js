@@ -1,7 +1,7 @@
 import { Button, Checkbox, Dialog, DialogActions, DialogTitle, DialogContent, Typography, FormControlLabel } from "@mui/material";
 import { useState } from "react";
-
 import React from "react";
+import { ModeToggle } from "./modeToggle";
 
 export default function SettingsDialog({isOpen, defaultValue, onClose, onConfirm }) {
     
@@ -19,8 +19,12 @@ export default function SettingsDialog({isOpen, defaultValue, onClose, onConfirm
     onClose()
     setUserSetting(defaultValue)
   }
+  const handleDarkModeChange = (checked) => {
+    setUserSetting(prev => ({...prev, darkMode: checked}));
+  };
 
   return(
+
       <React.Fragment>
       <Dialog open={isOpen}>
         <DialogTitle>Settings</DialogTitle>
@@ -35,6 +39,16 @@ export default function SettingsDialog({isOpen, defaultValue, onClose, onConfirm
               />
             }
           />
+        {/*put in the darkmode toggle*/}
+        <Typography style ={{marginTop: "15px"}}>Theme</Typography>
+
+        <ModeToggle
+        checked = {userSetting.darkMode}
+        onChange = {(_, checked)=> 
+          setUserSetting(prev => ({...prev, darkMode: checked}))
+        }
+        />
+
         </DialogContent>
         <DialogActions>
           <Button onClick={handleOnClose}>Discard</Button>

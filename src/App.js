@@ -8,13 +8,15 @@ import SettingsDialog from "./Settings/SettingsDialog"
 
 
 function App() {
-  const [signInWithGoogle, user, loading,error] = useSignInWithGoogle(auth);
+  const [signInWithGoogle, user, /*loading,error*/] = useSignInWithGoogle(auth);
   const SignOutFunction = () =>{signOut(auth);};
   const [showQuestions, setShowQuestions] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
   const [settings, setSettings] = useState({
+  
     theme: 'light',
     pushNotif: false,
+    darkMode: false,
     fontSize: 16,
     fonts: 'Comic Sans'
   });
@@ -36,13 +38,25 @@ function App() {
 
           <div>
 
+          </div>
+          </div>
+        )}
+    return (
+      <div className='App'>
+        <header style ={{backgroundColor: "#666A6D", display: "flex",
+        alignItems: "center", padding: "15px",
+      }}>
+          <div style={{flex: "1",textAlign: "left"}}>
+          <button onClick={SignOutFunction}>Sign out</button>
+          </div>
+
           <div style={{
             position: "fixed",
             bottom: "20px",
             right: "20px",
             zIndex: 9999
           }}>
-
+  
             <SettingsDialog
           isOpen={showSettings}
           defaultValue={settings}
@@ -53,18 +67,6 @@ function App() {
           }}
         />
           </div>
-          </div>
-          </div>
-        )}
-    return (
-      <div className='App'>
-        <header style ={{backgroundColor: "#666A6D", display: "flex",
-        alignItems: "center", padding: "15px",
-        }}>
-          <div style={{flex: "1",textAlign: "left"}}>
-          <button onClick={SignOutFunction}>Sign out</button>
-          </div>
-
           
           <div style = {{flex: "2",textAlign: "center"}}>
           <button onClick={()=>setShowQuestions(true)}>View Questions</button>

@@ -1,34 +1,34 @@
-import { useState } from "react";
-import React from 'react';
+import React from "react";
 
-export function ModeToggle(){
-    const [mode, setMode] = useState<Boolean>(false);
-    
-    const curMode = {
-        backgroundColor: mode ? "black" : "white",
-        color: mode ? "white" : "black",
-        minHeight: "100vh",
-        padding: "20px"
+
+export function ModeToggle({value, onChange}){
+    //has lightmode set to true as default
+    const pageStyle = {
+        backgroundColor: value ? "black" : "white",
+        color: value  ? "white" : "black",
+        padding: "20px",
+        borderRadius: "10px",
+        marginTop: "10px"
     };
 
     
 
     return(
-        <div style = {curMode}
+        <div style = {pageStyle}
             >
-            <h3>Toggle Light/Dark mode</h3>
             
-            <div className = "checkbox"
+            <label>Toggle Dark Mode
+            <input
             type="checkbox"
-            role="checkbox"
-            checked={mode}
+            checked={value}
             onChange={(event) => {
-                setMode(event.target.checked);
+                onChange(event.target.checked);
             }}
             />
             <span style={{ marginLeft: "10px" }}>
-                {mode ? "Dark Mode" : "Light Mode"}
+                {value ? "Dark Mode" : ""}
             </span>
+            </label>
             </div>
     );
 }
