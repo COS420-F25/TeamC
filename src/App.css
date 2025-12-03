@@ -2,6 +2,28 @@
   text-align: center;
 }
 
+/* Ensure all text elements inherit the font family */
+.App,
+.App *,
+.App button,
+.App h1,
+.App h2,
+.App h3,
+.App h4,
+.App h5,
+.App h6,
+.App p,
+.App span,
+.App div,
+.App a,
+.App header,
+.App main,
+.App input,
+.App textarea,
+.App select {
+  font-family: inherit !important;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;

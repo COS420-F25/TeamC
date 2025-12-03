@@ -19,8 +19,13 @@ function App() {
     pushNotif: false,
     darkMode: false,
     fontSize: 16,
-    fonts: 'Comic Sans'
+    fonts: 'Comic Sans MS'
   });
+
+  // Helper function to get font family style
+  const getFontFamily = () => {
+    return settings.fonts ? `"${settings.fonts}"` : '"Comic Sans MS"';
+  };
 
   if (user) {
     
@@ -30,15 +35,37 @@ function App() {
   <div
     className="App"
     style={{
+      /*this is where the settings are applied*/
       backgroundColor: settings.darkMode ? "#121212" : "white",
       color: settings.darkMode ? "white" : "black",
-      minHeight: "100vh"
+      minHeight: "100vh",
+      fontSize: settings.fontSize + "px",
+      fontFamily: getFontFamily()
+      
     }}
   >
-        <header style={{ backgroundColor: "#666A6D", padding: "15px" }}>
-            <button onClick={() => setShowQuestions(false)}>Back</button>
+        <header style={{ 
+          backgroundColor: settings.darkMode ? "black" : "#666A6D", 
+          color: settings.darkMode ? "white" : "inherit",
+          padding: "15px",
+          fontFamily: getFontFamily(),
+        }}>
+            <button 
+              onClick={() => setShowQuestions(false)}
+              style={{ 
+                fontFamily: 'inherit',
+                backgroundColor: settings.darkMode ? "black" : "inherit",
+                color: settings.darkMode ? "white" : "inherit",
+                border: settings.darkMode ? "1px solid white" : "1px solid black"
+              }}
+            >Back</button>
           </header>
-          <main style={{backgroundColor: "#f1f1f1", padding: "75px" }}>
+          <main style={{
+            backgroundColor: settings.darkMode ? "black" : "#f1f1f1", 
+            color: settings.darkMode ? "white" : "inherit",
+            padding: "75px",
+            fontFamily: getFontFamily(),
+          }}>
             <h1>Questions</h1>
             <div>
               
@@ -58,16 +85,33 @@ function App() {
       <div
     className="App"
     style={{
+      /*this is where the settings are applied*/
       backgroundColor: settings.darkMode ? "#121212" : "white",
       color: settings.darkMode ? "white" : "black",
-      minHeight: "100vh"
+      minHeight: "100vh",
+      fontSize: settings.fontSize + "px",
+      fontFamily: getFontFamily()
+
     }}
   >
-        <header style ={{backgroundColor: "#666A6D", display: "flex",
-        alignItems: "center", padding: "15px",
-      }}>
+        <header style ={{
+          backgroundColor: settings.darkMode ? "black" : "#666A6D", 
+          color: settings.darkMode ? "white" : "inherit",
+          display: "flex",
+          alignItems: "center", 
+          padding: "15px",
+          fontFamily: getFontFamily(),
+        }}>
           <div style={{flex: "1",textAlign: "left"}}>
-          <button onClick={SignOutFunction}>Sign out</button>
+          <button 
+            onClick={SignOutFunction}
+            style={{ 
+              fontFamily: 'inherit',
+              backgroundColor: settings.darkMode ? "black" : "inherit",
+              color: settings.darkMode ? "white" : "inherit",
+              border: settings.darkMode ? "1px solid white" : "1px solid black"
+            }}
+          >Sign out</button>
           </div>
 
           <div style={{
@@ -83,17 +127,34 @@ function App() {
           onClose={() => setShowSettings(false)}
           onConfirm={(newSettings) => {
             setShowSettings(false); 
-            setSettings(newSettings)
+            setSettings(newSettings);
+            console.log('Settings updated:', newSettings); // Debug: verify font is being updated
           }}
           />
           </div>
           
           <div style = {{flex: "2",textAlign: "center"}}>
-          <button onClick={()=>setShowQuestions(true)}>View Questions</button>
+          <button 
+            onClick={()=>setShowQuestions(true)}
+            style={{ 
+              fontFamily: 'inherit',
+              backgroundColor: settings.darkMode ? "black" : "inherit",
+              color: settings.darkMode ? "white" : "inherit",
+              border: settings.darkMode ? "1px solid white" : "1px solid black"
+            }}
+          >View Questions</button>
           </div>
 
           <div style = {{flex: "2",textAlign: "center"}}>
-          <button onClick={()=>setShowSettings(true)}>Settings</button>
+          <button 
+            onClick={()=>setShowSettings(true)}
+            style={{ 
+              fontFamily: 'inherit',
+              backgroundColor: settings.darkMode ? "black" : "inherit",
+              color: settings.darkMode ? "white" : "inherit",
+              border: settings.darkMode ? "1px solid white" : "1px solid black"
+            }}
+          >Settings</button>
           </div>
 
           <div style = {{flex: "1",}}>
@@ -112,13 +173,30 @@ function App() {
   setSettings(prev => ({ ...prev, darkMode: value }));
 }}}>
 
-    <div className="App">
+    <div 
+      className="App"
+      style={{
+        fontFamily: getFontFamily(),
+        fontSize: settings.fontSize + "px",
+        backgroundColor: settings.darkMode ? "#121212" : "white",
+        color: settings.darkMode ? "white" : "black",
+        minHeight: "100vh"
+      }}
+    >
           <h1>
             {" "}
-            <span style={{color: "blue"}}>
+            <span style={{color: settings.darkMode ? "white" : "blue"}}>
               Nudge App
               <div> 
-                <button onClick={()=>signInWithGoogle()} >Sign In</button>
+                <button 
+                  onClick={()=>signInWithGoogle()}
+                  style={{ 
+                    fontFamily: 'inherit',
+                    backgroundColor: settings.darkMode ? "black" : "inherit",
+                    color: settings.darkMode ? "white" : "inherit",
+                    border: settings.darkMode ? "1px solid white" : "1px solid black"
+                  }}
+                >Sign In</button>
               </div>
               </span>
             </h1>
@@ -131,6 +209,7 @@ function App() {
           href="https://reactjs.org"
           target="_blank"
           rel="noopener noreferrer"
+          style={{ color: settings.darkMode ? "#61dafb" : "#61dafb" }}
           >
           Learn React
         </a>

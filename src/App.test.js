@@ -30,8 +30,9 @@ test('View Questions', () => {
 });
 
 test('Show Settings', () => {
-  useSignInWithGoogle.mockReturnValue([jest.fn(), {displayName: 'User'}])
-  const settingsButton = screen.getByText(/SettingsDialog/i);
+  useSignInWithGoogle.mockReturnValue([jest.fn(), {displayName: 'User'}]);
+  render(<App />);
+  const settingsButton = screen.getByRole('button', { name: /settings/i });
   expect(settingsButton).toBeInTheDocument();
 });
 

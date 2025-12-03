@@ -11,13 +11,18 @@ export function ModeToggle({value, onChange}){
         marginTop: "10px"
     };
 
-    
+    const labelStyle = {
+        color: value ? "white" : "black"
+    };
+
+    const spanStyle = {
+        marginLeft: "10px",
+        color: value ? "white" : "black"
+    };
 
     return(
-        <div style = {pageStyle}
-            >
-            
-            <label>
+        <div style = {pageStyle}>
+            <label style={labelStyle}>
             Toggle Dark Mode
             <input
             type="checkbox"
@@ -25,7 +30,7 @@ export function ModeToggle({value, onChange}){
             onChange={(event) => onChange(event.target.checked)}
             style = {{marginLeft: "10px"}}
                 />
-            <span style={{ marginLeft: "10px" }}>
+            <span style={spanStyle}>
                 {value ? "Dark Mode" : "Light Mode"}
             </span>
             </label>
