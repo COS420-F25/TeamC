@@ -1,67 +1,56 @@
-import logo from './logo.svg';
+import NudgeLogo1 from './features/NudgeLogo1.png';
 import './App.css';
-import {auth} from "./firebase-config"
+import {auth, db} from "./firebase-config"
 import {useSignInWithGoogle} from "react-firebase-hooks/auth";
+import { useCollection } from 'react-firebase-hooks/firestore';
 import { signOut } from "firebase/auth";
 import React, { useState } from "react";
-
+import {collection} from "firebase/firestore";
+import { QuestionsPage } from './features/QuestionsPage';
+import { Groups } from './features/Groups';
+import { Flags } from './features/Flags';
 
 function App() {
   const [signInWithGoogle, user, loading,error] = useSignInWithGoogle(auth);
   const SignOutFunction = () =>{signOut(auth);};
   const [showQuestions, setShowQuestions] = useState(false);
+  const [showFlags, setShowFlags] = useState(false);
+  const [showGroups, setShowGroups] = useState(true);
+
 
   if (user) {
 
     if (showQuestions){
       return(
-      <div className='App'>
-        <header style={{ backgroundColor: "#666A6D", padding: "15px" }}>
-            <button onClick={() => setShowQuestions(false)}>Back</button>
-          </header>
-          <main style={{backgroundColor: "#f1f1f1", padding: "75px" }}>
-            <h1>Questions</h1>
-            <div>
-              
-            </div>
-          </main>
-
-          <footer style ={{backgroundColor: "#ddd",position: 'fixed',bottom: 5,display: 'flex',
-          justifyContent: 'center',alignItems: "center",width: '100%',
         
-        }}>
-          <input type='text' placeholder='...?'>
-          </input>
-          <button> Send </button>
-          </footer>
-
-      </div>
-    )}
-    return (
       <div className='App'>
-        <header style ={{backgroundColor: "#666A6D", display: "flex",
-        alignItems: "center", padding: "15px",
-        }}>
-          <div style={{flex: "1",textAlign: "left"}}>
-          <button onClick={SignOutFunction}>Sign out</button>
-          </div>
-
-          
-          <div style = {{flex: "2",textAlign: "center"}}>
-          <button onClick={()=>setShowQuestions(true)}>View Questions</button>
-          </div>
-
-          <div style = {{flex: "1",}}>
-          </div>
-
-        </header>
-
+        
+        <QuestionsPage></QuestionsPage>
+        <hr></hr>
+      </div>
+      );
+    }
+    if (showFlags){
+      return(
+        <div className='App'>
+          <Flags></Flags>
+          <hr></hr>
+        </div>
+      );
+    }
+    if (showGroups){
+      return(
+      <div className='App'>
+        <Groups setShowQuestions={setShowQuestions} setShowFlags={setShowFlags}></Groups>
       </div>
     )
   }
+}
+  
 
   return (
     <div className="App">
+
           <h1>
             {" "}
             <span style={{color: "blue"}}>
@@ -71,7 +60,7 @@ function App() {
               </div>
               </span>
             </h1>
-        <img src={logo} className="App-logo" alt="logo" />
+        <img src={NudgeLogo1} className="App-logo" alt="nudge-logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
@@ -84,7 +73,7 @@ function App() {
           Learn React
         </a>
     </div>
-  );
+  )
 }
 
 export default App;
