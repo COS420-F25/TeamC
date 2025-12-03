@@ -5,6 +5,7 @@ import { useSignInWithGoogle } from "react-firebase-hooks/auth";
 import { signOut } from "firebase/auth";
 import React, { useState } from "react";
 import SettingsDialog from "./Settings/SettingsDialog"
+import { themeSet } from './themeSet';
 
 
 function App() {
@@ -22,10 +23,18 @@ function App() {
   });
 
   if (user) {
+    
 
     if (showQuestions){
-      return(
-      <div className='App'>
+      return (
+  <div
+    className="App"
+    style={{
+      backgroundColor: settings.darkMode ? "#121212" : "white",
+      color: settings.darkMode ? "white" : "black",
+      minHeight: "100vh"
+    }}
+  >
         <header style={{ backgroundColor: "#666A6D", padding: "15px" }}>
             <button onClick={() => setShowQuestions(false)}>Back</button>
           </header>
@@ -42,7 +51,18 @@ function App() {
           </div>
         )}
     return (
-      <div className='App'>
+      <themeSet.Provider value={{ darkMode: settings.darkMode, setDarkMode: (value) => {
+  setSettings(prev => ({ ...prev, darkMode: value }));
+}}}>
+  
+      <div
+    className="App"
+    style={{
+      backgroundColor: settings.darkMode ? "#121212" : "white",
+      color: settings.darkMode ? "white" : "black",
+      minHeight: "100vh"
+    }}
+  >
         <header style ={{backgroundColor: "#666A6D", display: "flex",
         alignItems: "center", padding: "15px",
       }}>
@@ -65,7 +85,7 @@ function App() {
             setShowSettings(false); 
             setSettings(newSettings)
           }}
-        />
+          />
           </div>
           
           <div style = {{flex: "2",textAlign: "center"}}>
@@ -83,10 +103,15 @@ function App() {
         
         
       </div>
+          </themeSet.Provider>
     )
   }
 
   return (
+    <themeSet.Provider value={{ darkMode: settings.darkMode, setDarkMode: (value) => {
+  setSettings(prev => ({ ...prev, darkMode: value }));
+}}}>
+
     <div className="App">
           <h1>
             {" "}
@@ -106,10 +131,11 @@ function App() {
           href="https://reactjs.org"
           target="_blank"
           rel="noopener noreferrer"
-        >
+          >
           Learn React
         </a>
     </div>
+          </themeSet.Provider>
   );
   
   }

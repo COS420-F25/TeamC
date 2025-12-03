@@ -17,16 +17,16 @@ export function ModeToggle({value, onChange}){
         <div style = {pageStyle}
             >
             
-            <label>Toggle Dark Mode
+            <label>
+            Toggle Dark Mode
             <input
             type="checkbox"
             checked={value}
-            onChange={(event) => {
-                onChange(event.target.checked);
-            }}
-            />
+            onChange={(event) => onChange(event.target.checked)}
+            style = {{marginLeft: "10px"}}
+                />
             <span style={{ marginLeft: "10px" }}>
-                {value ? "Dark Mode" : ""}
+                {value ? "Dark Mode" : "Light Mode"}
             </span>
             </label>
             </div>

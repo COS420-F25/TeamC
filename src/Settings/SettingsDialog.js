@@ -43,8 +43,8 @@ export default function SettingsDialog({isOpen, defaultValue, onClose, onConfirm
         <Typography style ={{marginTop: "15px"}}>Theme</Typography>
 
         <ModeToggle
-        checked = {userSetting.darkMode}
-        onChange = {(_, checked)=> 
+        value = {userSetting.darkMode}
+        onChange = {( checked)=> 
           setUserSetting(prev => ({...prev, darkMode: checked}))
         }
         />
