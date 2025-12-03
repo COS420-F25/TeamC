@@ -4,8 +4,7 @@ import {auth} from "./firebase-config"
 import { useSignInWithGoogle } from "react-firebase-hooks/auth";
 import { signOut } from "firebase/auth";
 import React, { useState } from "react";
-import SettingsDialog from "./Footer/Settings/SettingsDialog"
-import {Footer} from './/Footer.css'
+import SettingsDialog from "./Settings/SettingsDialog"
 
 
 function App() {
@@ -35,26 +34,28 @@ function App() {
             </div>
           </main>
 
-          <footer style ={{backgroundColor: "#ddd",position: 'fixed',bottom: 5,display: 'flex',
-          justifyContent: 'center',alignItems: "center",width: '100%',
-        
-        }}>
-          <input type='text' placeholder='...?'>
-          </input>
-          <button> Send </button>
-          </footer>
+          <div>
 
-          <footer>
+          <div style={{
+            position: "fixed",
+            bottom: "20px",
+            right: "20px",
+            zIndex: 9999
+          }}>
+
             <SettingsDialog
           isOpen={showSettings}
           defaultValue={settings}
           onClose={() => setShowSettings(false)}
-          onConfirm={(newSettings) => {setShowSettings(false); setSettings(newSettings)}}
+          onConfirm={(newSettings) => {
+            setShowSettings(false); 
+            setSettings(newSettings)
+          }}
         />
-          </footer>
-
-      </div>
-    )}
+          </div>
+          </div>
+          </div>
+        )}
     return (
       <div className='App'>
         <header style ={{backgroundColor: "#666A6D", display: "flex",
@@ -109,13 +110,5 @@ function App() {
     </div>
   );
   
-  return(
-      <div className = "App" >
-        <Footer>
-
-        </Footer>
-    
-    </div>
-    );
   }
 export default App;

@@ -31,7 +31,7 @@ test('View Questions', () => {
 
 test('Show Settings', () => {
   useSignInWithGoogle.mockReturnValue([jest.fn(), {displayName: 'User'}])
-  const settingsButton = screen.getByText(/Settings/i);
+  const settingsButton = screen.getByText(/SettingsDialog/i);
   expect(settingsButton).toBeInTheDocument();
 });
 
