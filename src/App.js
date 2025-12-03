@@ -3,7 +3,7 @@ import './App.css';
 import {auth} from "./firebase-config"
 import { useSignInWithGoogle } from "react-firebase-hooks/auth";
 import { signOut } from "firebase/auth";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import SettingsDialog from "./Settings/SettingsDialog"
 import { themeSet } from './themeSet';
 
@@ -26,6 +26,32 @@ function App() {
   const getFontFamily = () => {
     return settings.fonts ? `"${settings.fonts}"` : '"Comic Sans MS"';
   };
+
+  // Apply font globally to buttons and questions - persists even when dialog is closed
+  useEffect(() => {
+    const fontFamily = settings.fonts || 'Comic Sans MS';
+    const styleId = 'app-global-font-style';
+    let styleElement = document.getElementById(styleId);
+    
+    if (!styleElement) {
+      styleElement = document.createElement('style');
+      styleElement.id = styleId;
+      document.head.appendChild(styleElement);
+    }
+    
+    // Update the style with the current font value from settings
+    styleElement.textContent = `
+      button, 
+      .App button,
+      h1, h2, h3, h4, h5, h6,
+      .App h1, .App h2, .App h3, .App h4, .App h5, .App h6,
+      main, .App main,
+      [class*="question"],
+      [id*="question"] {
+        font-family: "${fontFamily}" !important;
+      }
+    `;
+  }, [settings.fonts]);
 
   if (user) {
     

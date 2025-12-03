@@ -1,7 +1,8 @@
-import { Button, Checkbox, Dialog, DialogActions, DialogTitle, DialogContent, Typography, FormControlLabel, Select, MenuItem, FormControl, InputLabel } from "@mui/material";
+import { Button, Checkbox, Dialog, DialogActions, DialogTitle, DialogContent, Typography, FormControlLabel } from "@mui/material";
 import { useState, useEffect } from "react";
 import React from "react";
 import { ModeToggle } from "./modeToggle";
+import { FontSelector } from "./FontSelector";
 
 export default function SettingsDialog({isOpen, defaultValue, onClose, onConfirm }) {
     
@@ -30,8 +31,8 @@ export default function SettingsDialog({isOpen, defaultValue, onClose, onConfirm
     setUserSetting(defaultValue)
   }
 
-  const handleFontChange = (event) => {
-    setUserSetting(prev => ({...prev, fonts: event.target.value}));
+  const handleFontChange = (fontValue) => {
+    setUserSetting(prev => ({...prev, fonts: fontValue}));
   };
 
   const isDarkMode = userSetting?.darkMode || false;
@@ -49,7 +50,7 @@ export default function SettingsDialog({isOpen, defaultValue, onClose, onConfirm
             backgroundColor: isDarkMode ? 'black' : 'white',
             color: isDarkMode ? 'white' : 'black',
           },
-          '& .MuiDialogTitle-root, & .MuiDialogContent-root, & .MuiDialogActions-root, & .MuiTypography-root, & .MuiButton-root, & .MuiFormControlLabel-root, & .MuiInputLabel-root, & .MuiSelect-root, & .MuiMenuItem-root': {
+          '& .MuiDialogTitle-root, & .MuiDialogContent-root, & .MuiDialogActions-root, & .MuiTypography-root, & .MuiButton-root, & .MuiFormControlLabel-root': {
             fontFamily: 'inherit !important',
             color: isDarkMode ? 'white !important' : 'inherit',
           },
@@ -57,15 +58,6 @@ export default function SettingsDialog({isOpen, defaultValue, onClose, onConfirm
             backgroundColor: isDarkMode ? 'black' : 'inherit',
             color: isDarkMode ? 'white !important' : 'inherit',
             border: isDarkMode ? '1px solid white' : '1px solid gray',
-          },
-          '& .MuiInputLabel-root': {
-            color: isDarkMode ? 'white !important' : 'inherit',
-          },
-          '& .MuiSelect-root': {
-            color: isDarkMode ? 'white !important' : 'inherit',
-          },
-          '& .MuiOutlinedInput-notchedOutline': {
-            borderColor: isDarkMode ? 'white !important' : 'inherit',
           },
           '& .MuiFormControlLabel-label': {
             color: isDarkMode ? 'white !important' : 'inherit',
@@ -103,51 +95,11 @@ export default function SettingsDialog({isOpen, defaultValue, onClose, onConfirm
         }
         />
 
-        <Typography style={{marginTop: "15px", color: isDarkMode ? 'white' : 'inherit'}}>Font style</Typography>
-        <FormControl fullWidth style={{marginTop: "10px", marginBottom: "10px"}}>
-          <InputLabel id="font-family-label" style={{ color: isDarkMode ? 'white' : 'inherit' }}>Select Font</InputLabel>
-          <Select
-            labelId="font-family-label"
-            id="font-family-select"
-            value={userSetting.fonts || 'Comic Sans MS'}
-            label="Select Font"
-            onChange={handleFontChange}
-            sx={{
-              color: isDarkMode ? 'white !important' : 'inherit',
-              '& .MuiOutlinedInput-notchedOutline': {
-                borderColor: isDarkMode ? 'white !important' : 'inherit',
-              },
-              '&:hover .MuiOutlinedInput-notchedOutline': {
-                borderColor: isDarkMode ? 'white !important' : 'inherit',
-              },
-              '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                borderColor: isDarkMode ? 'white !important' : 'inherit',
-              },
-            }}
-          >
-            <MenuItem value="Comic Sans MS" sx={{ 
-              backgroundColor: isDarkMode ? 'black' : 'white',
-              color: isDarkMode ? 'white' : 'inherit',
-              '&:hover': {
-                backgroundColor: isDarkMode ? '#333' : 'inherit',
-              }
-            }}>Comic Sans</MenuItem>
-            <MenuItem value="Times New Roman" sx={{ 
-              backgroundColor: isDarkMode ? 'black' : 'white',
-              color: isDarkMode ? 'white' : 'inherit',
-              '&:hover': {
-                backgroundColor: isDarkMode ? '#333' : 'inherit',
-              }
-            }}>Times New Roman</MenuItem>
-            <MenuItem value="Arial" sx={{ 
-              backgroundColor: isDarkMode ? 'black' : 'white',
-              color: isDarkMode ? 'white' : 'inherit',
-              '&:hover': {
-                backgroundColor: isDarkMode ? '#333' : 'inherit',
-              }
-            }}>Arial</MenuItem>
-          </Select>
-        </FormControl>
+        <FontSelector
+          value={userSetting.fonts}
+          onChange={handleFontChange}
+          isDarkMode={isDarkMode}
+        />
 
         </DialogContent>
         <DialogActions>
