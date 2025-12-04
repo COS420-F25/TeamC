@@ -1,10 +1,14 @@
-import logo from './logo.svg';
+import NudgeLogo1 from './features/NudgeLogo1.png';
 import './App.css';
-import {auth} from "./firebase-config"
+import {auth, db} from "./firebase-config"
 import { useSignInWithGoogle } from "react-firebase-hooks/auth";
+import { useCollection } from 'react-firebase-hooks/firestore';
 import { signOut } from "firebase/auth";
 import React, { useState, useEffect } from "react";
-import SettingsDialog from "./Settings/SettingsDialog"
+import {collection} from "firebase/firestore";
+import { QuestionsPage } from './features/QuestionsPage';
+import { Groups } from './features/Groups';
+import { Flags } from './features/Flags';import SettingsDialog from "./Settings/SettingsDialog"
 import { themeSet } from './themeSet';
 
 
@@ -12,6 +16,9 @@ function App() {
   const [signInWithGoogle, user, /*loading,error*/] = useSignInWithGoogle(auth);
   const SignOutFunction = () =>{signOut(auth);};
   const [showQuestions, setShowQuestions] = useState(false);
+  const [showFlags, setShowFlags] = useState(false);
+  const [showGroups, setShowGroups] = useState(true);
+
   const [showSettings, setShowSettings] = useState(false);
   const [settings, setSettings] = useState({
   
@@ -194,6 +201,8 @@ function App() {
     )
   }
 
+  
+
   return (
     <themeSet.Provider value={{ darkMode: settings.darkMode, setDarkMode: (value) => {
   setSettings(prev => ({ ...prev, darkMode: value }));
@@ -209,6 +218,7 @@ function App() {
         minHeight: "100vh"
       }}
     >
+
           <h1>
             {" "}
             <span style={{color: settings.darkMode ? "white" : "blue"}}>
@@ -226,7 +236,7 @@ function App() {
               </div>
               </span>
             </h1>
-        <img src={logo} className="App-logo" alt="logo" />
+        <img src={NudgeLogo1} className="App-logo" alt="nudge-logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
@@ -241,7 +251,7 @@ function App() {
         </a>
     </div>
           </themeSet.Provider>
-  );
+  )
   
   }
 export default App;
