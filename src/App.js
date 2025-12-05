@@ -109,14 +109,10 @@ function App() {
         )}
 
 
-         if (showFlags){
-      return(
-        <div className='App'>
-          <Flags></Flags>
-          <hr></hr>
-        </div>
-      );
-    }
+    if (showFlags){
+      return (
+        {Flags}
+        )}
     if (showGroups){
       return(
       <div className='App'>
