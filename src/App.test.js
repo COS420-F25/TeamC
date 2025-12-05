@@ -2,6 +2,7 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import App from './App';
 import { useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import { Groups, } from './features/Groups';
+import { Flags, } from './features/Flags';
 
 jest.mock('react-firebase-hooks/auth',() => ({
   useSignInWithGoogle: jest.fn(),
@@ -66,14 +67,22 @@ jest.mock('react-firebase-hooks/auth',() => ({
   });
 
 
+  // test('View Flags Page', () => {
+  //     useSignInWithGoogle.mockReturnValue([jest.fn(), {displayName: 'User'}]);
+  //     render(<App />);
+  //     const ViewFlagsButton = screen.getByText(/View Flags/i);
+  //     fireEvent.click(ViewFlagsButton);
+  //     const flaggedPosts = screen.getByRole('heading', { name: /Flagged posts/i} );
+  //     expect(flaggedPosts).toBeInTheDocument();
+  //   });
   test('View Flags Page', () => {
-      useSignInWithGoogle.mockReturnValue([jest.fn(), {displayName: 'User'}]);
-      render(<App />);
-      const ViewFlagsButton = screen.getByText(/View Flags/i);
-      fireEvent.click(ViewFlagsButton);
-      const FlagsTitle = screen.getByText(/Flags/i);
-      expect(FlagsTitle).toBeInTheDocument();
-    });
+    useSignInWithGoogle.mockReturnValue([jest.fn(), {displayName: 'User'}]);
+    render(<App />);
+    const ViewFlagsButton = screen.getByText(/View Flags/i);
+    const mockFlags = jest.Flags
+    fireEvent.click(ViewFlagsButton);
+    expect(mockFlags).toHaveBeenCalled;
+  })
 
   
 

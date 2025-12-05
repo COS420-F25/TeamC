@@ -111,7 +111,7 @@ function App() {
 
     if (showFlags){
       return (
-        {Flags}
+        Flags
         )}
     if (showGroups){
       return(
