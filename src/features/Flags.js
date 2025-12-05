@@ -1,7 +1,6 @@
 import React,{ useState} from "react";
-import { Groups } from "./Groups";
 
-export function Flags(setShowQuestions){
+export function Flags(){
     const [showFlags, setShowFlags] = useState(false);
     return (
       <div className='App'>

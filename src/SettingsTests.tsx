@@ -1,5 +1,5 @@
 import {render, screen, fireEvent} from '@testing-library/react'
-import Settings from './Settings';
+//import Settings from './Settings';
 //This will be where the settings will be tested
 
 
