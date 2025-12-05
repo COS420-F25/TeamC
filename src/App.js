@@ -26,9 +26,10 @@ function App() {
     theme: 'light',
     pushNotif: false,
     darkMode: false,
-    fontSize: 16,
+    fontSizeLevel: 0,
     fonts: 'Comic Sans MS'
   });
+  const computedFontSize = 16 + settings.fontSizeLevel * 3;
   const handleSettingsConfirm = (updatedSettings) => {
   setSettings(updatedSettings);  // <- update global settings
   setShowSettings(false);        // <- close any SettingsDialog
@@ -77,7 +78,7 @@ function App() {
       backgroundColor: settings.darkMode ? "#121212" : "white",
       color: settings.darkMode ? "white" : "black",
       minHeight: "100vh",
-      fontSize: settings.fontSize + "px",
+      fontSize: computedFontSize + "px",
       fontFamily: getFontFamily()
       
     }}
