@@ -29,6 +29,10 @@ function App() {
     fontSize: 16,
     fonts: 'Comic Sans MS'
   });
+  const handleSettingsConfirm = (updatedSettings) => {
+  setSettings(updatedSettings);  // <- update global settings
+  setShowSettings(false);        // <- close any SettingsDialog
+};
   
   // Helper function to get font family style
   const getFontFamily = () => {
@@ -120,7 +124,13 @@ function App() {
     if (showGroups){
       return(
       <div className='App'>
-        <Groups setShowQuestions={setShowQuestions} setShowFlags={setShowFlags}></Groups>
+        <Groups
+  setShowQuestions={setShowQuestions}
+  setShowFlags={setShowFlags}
+  settings={settings}                   
+  onSettingsConfirm={handleSettingsConfirm}  
+/>
+
       </div>
     )
   }
