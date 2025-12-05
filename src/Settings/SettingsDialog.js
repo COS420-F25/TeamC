@@ -1,135 +1,160 @@
-import { Button, Checkbox, Dialog, DialogActions, DialogTitle, DialogContent, Typography, FormControlLabel } from "@mui/material";
+import {
+  Button,
+  Checkbox,
+  Dialog,
+  DialogActions,
+  DialogTitle,
+  DialogContent,
+  Typography,
+  FormControlLabel,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem
+} from "@mui/material";
+
 import { useState, useEffect } from "react";
 import React from "react";
 import { ModeToggle } from "./modeToggle";
 import { FontSelector } from "./FontSelector";
 
-export default function SettingsDialog({isOpen, defaultValue, onClose, onConfirm }) {
-    
-  const [userSetting, setUserSetting] = useState(defaultValue)
-  
-  // Get the current font family
-  const getFontFamily = () => {
-    return userSetting?.fonts ? `"${userSetting.fonts}"` : '"Comic Sans MS"';
-  };
+export default function SettingsDialog({
+  isOpen,
+  defaultValue,
+  onClose,
+  onConfirm
+}) {
+  // ONE unified state object
+  const [userSetting, setUserSetting] = useState(defaultValue);
 
-  // Sync state when defaultValue changes (e.g., when dialog reopens)
+  // Sync whenever defaultValue changes
   useEffect(() => {
     setUserSetting(defaultValue);
   }, [defaultValue]);
 
+  const isDarkMode = userSetting.darkMode === true;
+
+  // Get font family reliably
+  const getFontFamily = () => {
+    return userSetting?.fonts
+      ? `"${userSetting.fonts}"`
+      : '"Comic Sans MS"';
+  };
+
   const handlePushNotificationChange = (_, checked) => {
-    setUserSetting(prevUserSetting => ({ ...prevUserSetting, pushNotif: checked }));
+    setUserSetting((prev) => ({
+      ...prev,
+      pushNotif: checked
+    }));
+  };
+
+  const handleFontFamilyChange = (fontValue) => {
+    setUserSetting((prev) => ({
+      ...prev,
+      fonts: fontValue
+    }));
+  };
+
+  const handleFontSizeChange = (e) => {
+    setUserSetting((prev) => ({
+      ...prev,
+      fontSizeLevel: Number(e.target.value)
+    }));
   };
 
   const handleOnConfirm = () => {
-    onConfirm(userSetting)
-  }
-
-  const handleOnClose = () => {
-    onClose()
-    setUserSetting(defaultValue)
-  }
-
-  const handleFontChange = (fontValue) => {
-    setUserSetting(prev => ({...prev, fonts: fontValue}));
+    onConfirm(userSetting);
   };
 
-  const isDarkMode = userSetting?.darkMode || false;
+  const handleOnClose = () => {
+    setUserSetting(defaultValue);
+    onClose();
+  };
 
-  return(
-
-      <React.Fragment>
-      <Dialog 
+  return (
+    <React.Fragment>
+      <Dialog
         open={isOpen}
         sx={{
-          '& .MuiDialog-container': {
-            fontFamily: getFontFamily(),
+          "& .MuiDialog-container": {
+            fontFamily: getFontFamily()
           },
-          '& .MuiDialog-paper': {
-            backgroundColor: isDarkMode ? 'black' : 'white',
-            color: isDarkMode ? 'white' : 'black',
+          "& .MuiDialog-paper": {
+            backgroundColor: isDarkMode ? "black" : "white",
+            color: isDarkMode ? "white" : "black"
           },
-          '& .MuiDialogTitle-root, & .MuiDialogContent-root, & .MuiDialogActions-root, & .MuiTypography-root, & .MuiButton-root, & .MuiFormControlLabel-root': {
-            fontFamily: 'inherit !important',
-            color: isDarkMode ? 'white !important' : 'inherit',
+          "& .MuiTypography-root": {
+            color: isDarkMode ? "white" : "inherit"
           },
-          '& .MuiButton-root': {
-            backgroundColor: isDarkMode ? 'black' : 'inherit',
-            color: isDarkMode ? 'white !important' : 'inherit',
-            border: isDarkMode ? '1px solid white' : '1px solid gray',
-          },
-          '& .MuiFormControlLabel-label': {
-            color: isDarkMode ? 'white !important' : 'inherit',
-          },
-          '& .MuiCheckbox-root': {
-            color: isDarkMode ? 'white !important' : 'inherit',
-          },
+          "& .MuiFormControlLabel-root": {
+            color: isDarkMode ? "white" : "inherit"
+          }
         }}
       >
-        <DialogTitle style={{ color: isDarkMode ? 'white' : 'inherit' }}>Settings</DialogTitle>
+        <DialogTitle>Settings</DialogTitle>
+
         <DialogContent>
-          <Typography style={{ color: isDarkMode ? 'white' : 'inherit' }}>Change the setting for the user</Typography>
+          <Typography>
+            Change the settings for the user
+          </Typography>
+
+          {/* Push Notifications */}
           <FormControlLabel
             label="Push Notification"
             control={
               <Checkbox
                 checked={userSetting.pushNotif}
                 onChange={handlePushNotificationChange}
-                sx={{
-                  color: isDarkMode ? 'white !important' : 'inherit',
-                  '&.Mui-checked': {
-                    color: isDarkMode ? 'white !important' : 'inherit',
-                  }
-                }}
               />
             }
           />
-        {/*put in the darkmode toggle*/}
-        <Typography style={{marginTop: "15px", color: isDarkMode ? 'white' : 'inherit'}}>Theme</Typography>
 
-        <ModeToggle
-        value = {userSetting.darkMode}
-        onChange = {( checked)=> 
-          setUserSetting(prev => ({...prev, darkMode: checked}))
-        }
-        />
+          {/* Dark Mode */}
+          <Typography style={{ marginTop: "15px" }}>
+            Theme
+          </Typography>
 
-        <FontSelector
-          value={userSetting.fonts}
-          onChange={handleFontChange}
-          isDarkMode={isDarkMode}
-        />
+          <ModeToggle
+            value={isDarkMode}
+            onChange={(checked) =>
+              setUserSetting((prev) => ({
+                ...prev,
+                darkMode: checked
+              }))
+            }
+          />
 
+          {/* Font Family */}
+          <FontSelector
+            value={userSetting.fonts}
+            onChange={handleFontFamilyChange}
+            isDarkMode={isDarkMode}
+          />
+
+          {/* Font Size Dropdown */}
+          <FormControl fullWidth style={{ marginTop: "15px" }}>
+            <InputLabel>Font Size</InputLabel>
+            <Select
+              value={userSetting.fontSizeLevel}
+              label="Font Size"
+              onChange={handleFontSizeChange}
+            >
+              <MenuItem value={0}>+0 (Default)</MenuItem>
+              <MenuItem value={1}>+3</MenuItem>
+              <MenuItem value={2}>+6</MenuItem>
+              <MenuItem value={3}>+9</MenuItem>
+              <MenuItem value={4}>+12</MenuItem>
+            </Select>
+          </FormControl>
         </DialogContent>
+
         <DialogActions>
-          <Button 
-            onClick={handleOnClose}
-            sx={{
-              backgroundColor: isDarkMode ? 'black' : 'inherit',
-              color: isDarkMode ? 'white !important' : 'inherit',
-              border: isDarkMode ? '1px solid white' : '1px solid gray',
-              '&:hover': {
-                backgroundColor: isDarkMode ? '#333' : 'inherit',
-              }
-            }}
-          >Discard</Button>
-          <Button 
-            onClick={handleOnConfirm} 
-            autoFocus
-            sx={{
-              backgroundColor: isDarkMode ? 'black' : 'inherit',
-              color: isDarkMode ? 'white !important' : 'inherit',
-              border: isDarkMode ? '1px solid white' : '1px solid gray',
-              '&:hover': {
-                backgroundColor: isDarkMode ? '#333' : 'inherit',
-              }
-            }}
-          >
+          <Button onClick={handleOnClose}>Discard</Button>
+          <Button onClick={handleOnConfirm} autoFocus>
             Apply
           </Button>
         </DialogActions>
       </Dialog>
     </React.Fragment>
-  )
+  );
 }
