@@ -2,9 +2,9 @@
 ## Mission Statement <br>
 Here at Team Crab, we know that sometimes the hardest hurdles are the ones we place on ourselves. We strive to help those who are trapped, struggling silently alone by giving them the tools they need to ask the hard questions, because at Team Crab we all get out of the bucket or none at all.<br>
 ## Team Roles: <br>
-PM: Aidan Carty <br>
+PM: Nicholas Mchugh <br>
 Designer: Nathan Wheeler <br>
-Dev1: Nicholas Mchugh <br>
+Dev1: Aidan Carty <br>
 Dev2: Logan Madden <br>
 Dev3?: Sam Van <br>
 

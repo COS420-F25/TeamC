@@ -11,6 +11,25 @@ export function Flags(){
           <h1>Flags</h1>
           <div>
           </div>
+          <div style = {{flex: "1",}}>
+          </div>
+        
+        <div>
+          <h2>flagged posts</h2>
+        </div>
+        <div className="parent">
+        <button className='round-1'>&#128100;</button>
+        <button className='round-1'>&#128100;</button>
+        <button className='round-1'>&#128100;</button>
+        </div>
+       
+        <h2>flagged users</h2>
+        <div className="parent">
+        <button className='round-1'>&#128100;</button>
+        <button className='round-1'>&#128100;</button>
+        <button className='round-1'>&#128100;</button>
+        </div>
+        <hr></hr>
         </main>
       </div>
     );
