@@ -67,14 +67,6 @@ jest.mock('react-firebase-hooks/auth',() => ({
   });
 
 
-  // test('View Flags Page', () => {
-  //     useSignInWithGoogle.mockReturnValue([jest.fn(), {displayName: 'User'}]);
-  //     render(<App />);
-  //     const ViewFlagsButton = screen.getByText(/View Flags/i);
-  //     fireEvent.click(ViewFlagsButton);
-  //     const flaggedPosts = screen.getByRole('heading', { name: /Flagged posts/i} );
-  //     expect(flaggedPosts).toBeInTheDocument();
-  //   });
   test('View Flags Page', () => {
     useSignInWithGoogle.mockReturnValue([jest.fn(), {displayName: 'User'}]);
     render(<App />);
