@@ -8,8 +8,10 @@ import React, { useState, useEffect } from "react";
 import {collection} from "firebase/firestore";
 import { QuestionsPage } from './features/QuestionsPage';
 import { Groups } from './features/Groups';
-import { Flags } from './features/Flags';import SettingsDialog from "./Settings/SettingsDialog"
+import { Flags } from './features/Flags';
 import { themeSet } from './themeSet';
+import SettingsDialog from "./Settings/SettingsDialog"
+
 
 
 function App() {
@@ -18,7 +20,6 @@ function App() {
   const [showQuestions, setShowQuestions] = useState(false);
   const [showFlags, setShowFlags] = useState(false);
   const [showGroups, setShowGroups] = useState(true);
-
   const [showSettings, setShowSettings] = useState(false);
   const [settings, setSettings] = useState({
   
@@ -28,7 +29,7 @@ function App() {
     fontSize: 16,
     fonts: 'Comic Sans MS'
   });
-
+  
   // Helper function to get font family style
   const getFontFamily = () => {
     return settings.fonts ? `"${settings.fonts}"` : '"Comic Sans MS"';
@@ -104,12 +105,25 @@ function App() {
               
             </div>
           </main>
-
-          <div>
-
-          </div>
           </div>
         )}
+
+
+         if (showFlags){
+      return(
+        <div className='App'>
+          <Flags></Flags>
+          <hr></hr>
+        </div>
+      );
+    }
+    if (showGroups){
+      return(
+      <div className='App'>
+        <Groups setShowQuestions={setShowQuestions} setShowFlags={setShowFlags}></Groups>
+      </div>
+    )
+  }
     return (
       <themeSet.Provider value={{ darkMode: settings.darkMode, setDarkMode: (value) => {
   setSettings(prev => ({ ...prev, darkMode: value }));
@@ -124,7 +138,7 @@ function App() {
       minHeight: "100vh",
       fontSize: settings.fontSize + "px",
       fontFamily: getFontFamily()
-
+      
     }}
   >
         <header style ={{
@@ -154,16 +168,6 @@ function App() {
             zIndex: 9999
           }}>
   
-            <SettingsDialog
-          isOpen={showSettings}
-          defaultValue={settings}
-          onClose={() => setShowSettings(false)}
-          onConfirm={(newSettings) => {
-            setShowSettings(false); 
-            setSettings(newSettings);
-            console.log('Settings updated:', newSettings); // Debug: verify font is being updated
-          }}
-          />
           </div>
           
           <div style = {{flex: "2",textAlign: "center"}}>
@@ -176,10 +180,8 @@ function App() {
               border: settings.darkMode ? "1px solid white" : "1px solid black"
             }}
           >View Questions</button>
-          </div>
-
-          <div style = {{flex: "2",textAlign: "center"}}>
-          <button 
+          
+          {/* <button 
             onClick={()=>setShowSettings(true)}
             style={{ 
               fontFamily: 'inherit',
@@ -187,72 +189,76 @@ function App() {
               color: settings.darkMode ? "white" : "inherit",
               border: settings.darkMode ? "1px solid white" : "1px solid black"
             }}
-          >Settings</button>
+          >Settings</button>*/}
           </div>
 
           <div style = {{flex: "1",}}>
-          </div>
+          </div> 
 
         </header>
         
         
-      </div>
-          </themeSet.Provider>
-    )
-  }
+      {/*this section was written by an AI to fix our broken code*/}
+           </div>
+    </themeSet.Provider>
+  );
+}
 
-  
-
-  return (
-    <themeSet.Provider value={{ darkMode: settings.darkMode, setDarkMode: (value) => {
-  setSettings(prev => ({ ...prev, darkMode: value }));
-}}}>
-
-    <div 
+// If user is NOT logged in, show login screen
+return (
+  <themeSet.Provider
+    value={{
+      darkMode: settings.darkMode,
+      setDarkMode: (value) =>
+        setSettings((prev) => ({ ...prev, darkMode: value })),
+    }}
+  >
+    <div
       className="App"
       style={{
         fontFamily: getFontFamily(),
         fontSize: settings.fontSize + "px",
         backgroundColor: settings.darkMode ? "#121212" : "white",
         color: settings.darkMode ? "white" : "black",
-        minHeight: "100vh"
+        minHeight: "100vh",
       }}
     >
+      <h1>
+        <span style={{ color: settings.darkMode ? "white" : "blue" }}>
+          Nudge App
+        </span>
 
-          <h1>
-            {" "}
-            <span style={{color: settings.darkMode ? "white" : "blue"}}>
-              Nudge App
-              <div> 
-                <button 
-                  onClick={()=>signInWithGoogle()}
-                  style={{ 
-                    fontFamily: 'inherit',
-                    backgroundColor: settings.darkMode ? "black" : "inherit",
-                    color: settings.darkMode ? "white" : "inherit",
-                    border: settings.darkMode ? "1px solid white" : "1px solid black"
-                  }}
-                >Sign In</button>
-              </div>
-              </span>
-            </h1>
-        <img src={NudgeLogo1} className="App-logo" alt="nudge-logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{ color: settings.darkMode ? "#61dafb" : "#61dafb" }}
+        <div>
+          <button
+            onClick={() => signInWithGoogle()}
+            style={{
+              fontFamily: "inherit",
+              backgroundColor: settings.darkMode ? "black" : "inherit",
+              color: settings.darkMode ? "white" : "inherit",
+              border: settings.darkMode
+                ? "1px solid white"
+                : "1px solid black",
+            }}
           >
-          Learn React
-        </a>
+            Sign In
+          </button>
+        </div>
+      </h1>
+
+      <img src={NudgeLogo1} className="App-logo" alt="nudge-logo" />
+      <p>Edit src/App.js and save to reload.</p>
+      <a
+        className="App-link"
+        href="https://reactjs.org"
+        target="_blank"
+        rel="noopener noreferrer"
+        style={{ color: "#61dafb" }}
+      >
+        Learn React
+      </a>
     </div>
-          </themeSet.Provider>
-  )
-  
-  
-  }
+  </themeSet.Provider>
+);
+}
+
 export default App;

@@ -7,8 +7,6 @@ jest.mock('react-firebase-hooks/auth',() => ({
   useSignInWithGoogle: jest.fn(),
 }));
 
-import { Groups, } from './features/Groups';
-
 jest.mock('react-firebase-hooks/auth',() => ({
   useSignInWithGoogle: jest.fn(),
 }));
