@@ -9,6 +9,7 @@ import {collection} from "firebase/firestore";
 import { QuestionsPage } from './features/QuestionsPage';
 import { Groups } from './features/Groups';
 import { Flags } from './features/Flags';
+import { MessageView } from './features/MessageView.tsx';
 import { themeSet } from './themeSet';
 import SettingsDialog from "./Settings/SettingsDialog"
 
@@ -17,10 +18,9 @@ import SettingsDialog from "./Settings/SettingsDialog"
 function App() {
   const [signInWithGoogle, user, /*loading,error*/] = useSignInWithGoogle(auth);
   const SignOutFunction = () =>{signOut(auth);};
-  const [showQuestions, setShowQuestions] = useState(false);
-  const [showFlags, setShowFlags] = useState(false);
-  const [showGroups, setShowGroups] = useState(true);
+  const [currentView, setCurrentView] = useState("groups");
   const [showSettings, setShowSettings] = useState(false);
+  const [otherUser, setOtherUser] = useState(null);
   const [settings, setSettings] = useState({
   
     theme: 'light',
@@ -69,7 +69,7 @@ function App() {
   if (user) {
     
 
-    if (showQuestions){
+    if (currentView === "questions"){
       return (
   <div
     className="App"
@@ -90,7 +90,7 @@ function App() {
           fontFamily: getFontFamily(),
         }}>
             <button 
-              onClick={() => setShowQuestions(false)}
+              onClick={() => setCurrentView("groups")}
               style={{ 
                 fontFamily: 'inherit',
                 backgroundColor: settings.darkMode ? "black" : "inherit",
@@ -114,22 +114,62 @@ function App() {
         )}
 
 
-         if (showFlags){
+         if (currentView === "flags"){
       return(
         <div className='App'>
-          <Flags></Flags>
+          <Flags setCurrentView={setCurrentView}></Flags>
           <hr></hr>
         </div>
       );
     }
-    if (showGroups){
+    if (currentView === "Messages"){
+      return (
+  <div
+    className="App"
+    style={{
+      /*this is where the settings are applied*/
+      backgroundColor: settings.darkMode ? "#121212" : "white",
+      color: settings.darkMode ? "white" : "black",
+      minHeight: "100vh",
+      fontSize: computedFontSize + "px",
+      fontFamily: getFontFamily()
+      
+    }}
+  >
+        <header style={{ 
+          backgroundColor: settings.darkMode ? "black" : "#666A6D", 
+          color: settings.darkMode ? "white" : "inherit",
+          padding: "15px",
+          fontFamily: getFontFamily(),
+        }}>
+            <button 
+              onClick={() => setCurrentView("groups")}
+              style={{ 
+                fontFamily: 'inherit',
+                backgroundColor: settings.darkMode ? "black" : "inherit",
+                color: settings.darkMode ? "white" : "inherit",
+                border: settings.darkMode ? "1px solid white" : "1px solid black"
+              }}
+            >Back</button>
+          </header>
+          <main style={{
+            backgroundColor: settings.darkMode ? "black" : "#f1f1f1", 
+            color: settings.darkMode ? "white" : "inherit",
+            padding: "75px",
+            fontFamily: getFontFamily(),
+          }}>
+            <MessageView setCurrentView={setCurrentView} otherUser={otherUser}></MessageView>
+          </main>
+          </div>
+        )}
+    if (currentView === "groups"){
       return(
       <div className='App'>
         <Groups
-  setShowQuestions={setShowQuestions}
-  setShowFlags={setShowFlags}
+  setCurrentView={setCurrentView}
   settings={settings}                   
   onSettingsConfirm={handleSettingsConfirm}  
+  setOtherUser={setOtherUser}
 />
 
       </div>
@@ -183,7 +223,7 @@ function App() {
           
           <div style = {{flex: "2",textAlign: "center"}}>
           <button 
-            onClick={()=>setShowQuestions(true)}
+            onClick={()=>setCurrentView("questions")}
             style={{ 
               fontFamily: 'inherit',
               backgroundColor: settings.darkMode ? "black" : "inherit",

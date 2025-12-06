@@ -3,6 +3,8 @@ import {auth} from "../firebase-config"
 import { signOut } from "firebase/auth";
 import SettingsDialog from "../Settings/SettingsDialog"
 
+
+
 function AppFooter({ setShowSettings }) {
   return (
     <div
@@ -37,10 +39,10 @@ function AppFooter({ setShowSettings }) {
 }
 
 export function Groups({ 
-  setShowQuestions, 
-  setShowFlags, 
+  setCurrentView, 
   settings,             
-  onSettingsConfirm     
+  onSettingsConfirm,
+  setOtherUser     
 }) {
   const [showSettings, setShowSettings] = useState(false);
   const SignOutFunction = () =>{signOut(auth);};
@@ -66,12 +68,12 @@ export function Groups({
       </div>
 
       <div style={{ flex: "13", textAlign: "center" }}>
-        <button onClick={() => setShowQuestions(true)}>View Questions</button>
+        <button onClick={() => setCurrentView("questions")}>View Questions</button>
       </div>
 
       {tempAd && (
         <div style={{ flex: "1", textAlign: "justify" }}>
-          <button onClick={() => setShowFlags(true)}>View Flags</button>
+          <button onClick={() => setCurrentView("flags")}>View Flags</button>
         </div>
       )}
 
@@ -83,9 +85,9 @@ export function Groups({
     </div>
 
     <div className="parent">
-      <button className='round-1'>&#128100;</button>
-      <button className='round-1'>&#128100;</button>
-      <button className='round-1'>&#128100;</button>
+      <button className='round-1' onClick={() => {setCurrentView("Messages"); setOtherUser("Other Test User")}}>&#128100;</button>
+      <button className='round-1' onClick={() => {setCurrentView("Messages"); setOtherUser("TestUser2")}}>&#128100;</button>
+      <button className='round-1' onClick={() => setCurrentView("Messages")}>&#128100;</button>
     </div>
 
     <h2>Recent Question Boards</h2>
