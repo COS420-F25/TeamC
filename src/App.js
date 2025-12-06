@@ -9,6 +9,7 @@ import {collection} from "firebase/firestore";
 import { QuestionsPage } from './features/QuestionsPage';
 import { Groups } from './features/Groups';
 import { Flags } from './features/Flags';
+import { MessageView } from './features/MessageView.tsx';
 import { themeSet } from './themeSet';
 import SettingsDialog from "./Settings/SettingsDialog"
 
@@ -120,6 +121,46 @@ function App() {
         </div>
       );
     }
+    if (currentView === "Messages"){
+      return (
+  <div
+    className="App"
+    style={{
+      /*this is where the settings are applied*/
+      backgroundColor: settings.darkMode ? "#121212" : "white",
+      color: settings.darkMode ? "white" : "black",
+      minHeight: "100vh",
+      fontSize: computedFontSize + "px",
+      fontFamily: getFontFamily()
+      
+    }}
+  >
+        <header style={{ 
+          backgroundColor: settings.darkMode ? "black" : "#666A6D", 
+          color: settings.darkMode ? "white" : "inherit",
+          padding: "15px",
+          fontFamily: getFontFamily(),
+        }}>
+            <button 
+              onClick={() => setCurrentView("groups")}
+              style={{ 
+                fontFamily: 'inherit',
+                backgroundColor: settings.darkMode ? "black" : "inherit",
+                color: settings.darkMode ? "white" : "inherit",
+                border: settings.darkMode ? "1px solid white" : "1px solid black"
+              }}
+            >Back</button>
+          </header>
+          <main style={{
+            backgroundColor: settings.darkMode ? "black" : "#f1f1f1", 
+            color: settings.darkMode ? "white" : "inherit",
+            padding: "75px",
+            fontFamily: getFontFamily(),
+          }}>
+            <MessageView setCurrentView={setCurrentView}></MessageView>
+          </main>
+          </div>
+        )}
     if (currentView === "groups"){
       return(
       <div className='App'>

@@ -1,7 +1,7 @@
 import React,{ JSX, useState } from "react";
 import {collection, DocumentData} from "firebase/firestore";
 import {useCollection} from "react-firebase-hooks/firestore";
-import {auth, db} from "../firebase-config.tsx";
+import {auth, db} from "../firebase-config.js";
 import {Message} from "../Message.tsx";
 
 export function MessageView(): JSX.Element {    

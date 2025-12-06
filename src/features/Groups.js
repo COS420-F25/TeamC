@@ -82,9 +82,9 @@ export function Groups({
     </div>
 
     <div className="parent">
-      <button className='round-1'>&#128100;</button>
-      <button className='round-1'>&#128100;</button>
-      <button className='round-1'>&#128100;</button>
+      <button className='round-1' onClick={() => setCurrentView("Messages")}>&#128100;</button>
+      <button className='round-1' onClick={() => setCurrentView("Messages")}>&#128100;</button>
+      <button className='round-1' onClick={() => setCurrentView("Messages")}>&#128100;</button>
     </div>
 
     <h2>Recent Question Boards</h2>
