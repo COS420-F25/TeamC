@@ -37,8 +37,7 @@ function AppFooter({ setShowSettings }) {
 }
 
 export function Groups({ 
-  setShowQuestions, 
-  setShowFlags, 
+  setCurrentView, 
   settings,             
   onSettingsConfirm     
 }) {
@@ -66,12 +65,12 @@ export function Groups({
       </div>
 
       <div style={{ flex: "13", textAlign: "center" }}>
-        <button onClick={() => setShowQuestions(true)}>View Questions</button>
+        <button onClick={() => setCurrentView("questions")}>View Questions</button>
       </div>
 
       {tempAd && (
         <div style={{ flex: "1", textAlign: "justify" }}>
-          <button onClick={() => setShowFlags(true)}>View Flags</button>
+          <button onClick={() => setCurrentView("flags")}>View Flags</button>
         </div>
       )}
 

@@ -17,9 +17,7 @@ import SettingsDialog from "./Settings/SettingsDialog"
 function App() {
   const [signInWithGoogle, user, /*loading,error*/] = useSignInWithGoogle(auth);
   const SignOutFunction = () =>{signOut(auth);};
-  const [showQuestions, setShowQuestions] = useState(false);
-  const [showFlags, setShowFlags] = useState(false);
-  const [showGroups, setShowGroups] = useState(true);
+  const [currentView, setCurrentView] = useState("groups");
   const [showSettings, setShowSettings] = useState(false);
   const [settings, setSettings] = useState({
   
@@ -69,7 +67,7 @@ function App() {
   if (user) {
     
 
-    if (showQuestions){
+    if (currentView === "questions"){
       return (
   <div
     className="App"
@@ -90,7 +88,7 @@ function App() {
           fontFamily: getFontFamily(),
         }}>
             <button 
-              onClick={() => setShowQuestions(false)}
+              onClick={() => setCurrentView("groups")}
               style={{ 
                 fontFamily: 'inherit',
                 backgroundColor: settings.darkMode ? "black" : "inherit",
@@ -114,20 +112,19 @@ function App() {
         )}
 
 
-         if (showFlags){
+         if (currentView === "flags"){
       return(
         <div className='App'>
-          <Flags></Flags>
+          <Flags setCurrentView={setCurrentView}></Flags>
           <hr></hr>
         </div>
       );
     }
-    if (showGroups){
+    if (currentView === "groups"){
       return(
       <div className='App'>
         <Groups
-  setShowQuestions={setShowQuestions}
-  setShowFlags={setShowFlags}
+  setCurrentView={setCurrentView}
   settings={settings}                   
   onSettingsConfirm={handleSettingsConfirm}  
 />
@@ -183,7 +180,7 @@ function App() {
           
           <div style = {{flex: "2",textAlign: "center"}}>
           <button 
-            onClick={()=>setShowQuestions(true)}
+            onClick={()=>setCurrentView("questions")}
             style={{ 
               fontFamily: 'inherit',
               backgroundColor: settings.darkMode ? "black" : "inherit",
