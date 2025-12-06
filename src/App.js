@@ -20,6 +20,7 @@ function App() {
   const SignOutFunction = () =>{signOut(auth);};
   const [currentView, setCurrentView] = useState("groups");
   const [showSettings, setShowSettings] = useState(false);
+  const [otherUser, setOtherUser] = useState(null);
   const [settings, setSettings] = useState({
   
     theme: 'light',
@@ -157,7 +158,7 @@ function App() {
             padding: "75px",
             fontFamily: getFontFamily(),
           }}>
-            <MessageView setCurrentView={setCurrentView}></MessageView>
+            <MessageView setCurrentView={setCurrentView} otherUser={otherUser}></MessageView>
           </main>
           </div>
         )}
@@ -168,6 +169,7 @@ function App() {
   setCurrentView={setCurrentView}
   settings={settings}                   
   onSettingsConfirm={handleSettingsConfirm}  
+  setOtherUser={setOtherUser}
 />
 
       </div>

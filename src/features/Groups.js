@@ -3,6 +3,8 @@ import {auth} from "../firebase-config"
 import { signOut } from "firebase/auth";
 import SettingsDialog from "../Settings/SettingsDialog"
 
+
+
 function AppFooter({ setShowSettings }) {
   return (
     <div
@@ -39,7 +41,8 @@ function AppFooter({ setShowSettings }) {
 export function Groups({ 
   setCurrentView, 
   settings,             
-  onSettingsConfirm     
+  onSettingsConfirm,
+  setOtherUser     
 }) {
   const [showSettings, setShowSettings] = useState(false);
   const SignOutFunction = () =>{signOut(auth);};
@@ -82,8 +85,8 @@ export function Groups({
     </div>
 
     <div className="parent">
-      <button className='round-1' onClick={() => setCurrentView("Messages")}>&#128100;</button>
-      <button className='round-1' onClick={() => setCurrentView("Messages")}>&#128100;</button>
+      <button className='round-1' onClick={() => {setCurrentView("Messages"); setOtherUser("Other Test User")}}>&#128100;</button>
+      <button className='round-1' onClick={() => {setCurrentView("Messages"); setOtherUser("TestUser2")}}>&#128100;</button>
       <button className='round-1' onClick={() => setCurrentView("Messages")}>&#128100;</button>
     </div>
 
