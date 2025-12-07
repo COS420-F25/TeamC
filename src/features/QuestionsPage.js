@@ -1,7 +1,7 @@
 import React,{ useState } from "react";
 
 
-export function QuestionsPage({setShowQuestions}){
+export function QuestionsPage({setCurrentView, Settings}){
   const [userInput, setuserInput] = useState(String);
   const [Post,setPost] = useState([]);
   const handleOnClick = ()=>{
@@ -11,11 +11,10 @@ export function QuestionsPage({setShowQuestions}){
   const saveInput=(e)=>{
     setuserInput(e.target.value);
   }
-
     return(
         
         <div className='App'>
-          <main style={{backgroundColor: "#f1f1f1", padding: "75px" }}>
+          <main style={{backgroundColor: "#f1f1f1", padding: "35px" }}>
             <h1>Questions</h1>
             <hr></hr>
           </main>
