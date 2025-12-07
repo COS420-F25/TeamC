@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from "@testing-library/react";
-import SettingsDialog from "./SettingsDialog";
+import SettingsDialog from "../Settings/SettingsDialog";
 
 describe("SettingsDialog", () => {
 
