@@ -42,6 +42,7 @@
     ]
   },
   "devDependencies": {
+    "@babel/core": "^7.28.5",
     "@types/jest": "^30.0.0"
   }
 }
