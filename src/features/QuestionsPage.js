@@ -15,9 +15,6 @@ export function QuestionsPage({setShowQuestions}){
     return(
         
         <div className='App'>
-        <header style={{ backgroundColor: "#666A6D", padding: "15px" }}>
-            <button onClick={() => setShowQuestions(false)}>Back</button>
-          </header>
           <main style={{backgroundColor: "#f1f1f1", padding: "75px" }}>
             <h1>Questions</h1>
             <hr></hr>

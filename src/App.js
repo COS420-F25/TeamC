@@ -71,18 +71,17 @@ function App() {
 
     if (showQuestions){
       return (
-  <div
-    className="App"
-    style={{
-      /*this is where the settings are applied*/
-      backgroundColor: settings.darkMode ? "#121212" : "white",
-      color: settings.darkMode ? "white" : "black",
-      minHeight: "100vh",
-      fontSize: computedFontSize + "px",
-      fontFamily: getFontFamily()
-      
-    }}
-  >
+        <div
+          className="App"
+          style={{
+            /*this is where the settings are applied*/
+            backgroundColor: settings.darkMode ? "#121212" : "white",
+            color: settings.darkMode ? "white" : "black",
+            minHeight: "100vh",
+            fontSize: computedFontSize + "px",
+            fontFamily: getFontFamily()           
+          }}
+    >
         <header style={{ 
           backgroundColor: settings.darkMode ? "black" : "#666A6D", 
           color: settings.darkMode ? "white" : "inherit",
@@ -105,9 +104,12 @@ function App() {
             padding: "75px",
             fontFamily: getFontFamily(),
           }}>
-            <h1>Questions</h1>
+          
             <div>
-              
+            <QuestionsPage
+    settings={settings}
+    setShowQuestions={setShowQuestions}
+  />
             </div>
           </main>
           </div>
