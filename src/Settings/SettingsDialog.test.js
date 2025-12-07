@@ -24,7 +24,8 @@ describe("SettingsDialog", () => {
   test("renders dialog when open", () => {
     setup();
     expect(screen.getByText("Settings")).toBeInTheDocument();
-    expect(screen.getByText("Change the setting for the user")).toBeInTheDocument();
+    expect(screen.getByText("Change the settings for the user")).toBeInTheDocument();
+
   });
 
   test("push notification checkbox reflects default setting", () => {
