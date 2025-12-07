@@ -53,7 +53,7 @@ export function Flags(){
             fontFamily: getFontFamily(),
           }}>
  <div>
-          <h2>Flagged posts</h2>
+        <h2>Flagged posts</h2>
         </div>
         <div className="parent">
         <button className='round-1'>&#128100;</button>
