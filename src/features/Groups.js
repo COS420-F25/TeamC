@@ -85,9 +85,9 @@ export function Groups({
     </div>
 
     <div className="parent">
-      <button className='round-1' onClick={() => {setCurrentView("Messages"); setOtherUser("Other Test User")}}>&#128100;</button>
+      <button className='round-1' onClick={() => {setCurrentView("Messages"); setOtherUser("OtherTestUser")}}>&#128100;</button>
       <button className='round-1' onClick={() => {setCurrentView("Messages"); setOtherUser("TestUser2")}}>&#128100;</button>
-      <button className='round-1' onClick={() => setCurrentView("Messages")}>&#128100;</button>
+      <button className='round-1' onClick={() => {setCurrentView("Messages"); setOtherUser("NotaUser")}}>&#128100;</button>
     </div>
 
     <h2>Recent Question Boards</h2>

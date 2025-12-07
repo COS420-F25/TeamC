@@ -12,7 +12,7 @@ export function MessageView({ otherUser }: { otherUser: string }) {
     const [newMessage, setNewMessage] = useState("");
 
     const [messageDocId, setMessageDocId] = useState<string | null>(null);
-    const currentUser = auth.currentUser?.email || "UnknownUser";
+    const currentUser = auth.currentUser?.email || "User";
 
     useEffect(() => {
 

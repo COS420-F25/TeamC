@@ -1,5 +1,5 @@
 import {render,screen,fireEvent} from '@testing-library/react';
-import { QuestionsPage } from './QuestionsPage';
+import { QuestionsPage } from '../features/QuestionsPage';
 import React, {act} from "react";
 
 describe("Question Posting",()=>{
